@@ -1,0 +1,502 @@
+{
+  "info": {
+    "name": "GitHub AI Agent - MongoDB Enhanced",
+    "description": "Complete API collection for MongoDB-enhanced GitHub AI Agent with user management, chat history, analytics, and bug tracking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"github_url\": \"https://github.com/octocat/Hello-World\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["register"]
+            },
+            "description": "Register a new user account with GitHub repository configuration"
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["login"]
+            },
+            "description": "Authenticate user and get session ID"
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"session_id\": \"{{session_id}}\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/logout",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["logout"]
+            },
+            "description": "Logout user and clear session"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chat & Messaging",
+      "item": [
+        {
+          "name": "Send Chat Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Create a bug report for the login page not working\",\n  \"session_id\": \"{{session_id}}\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/chat",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["chat"]
+            },
+            "description": "Send a message using authenticated session (saves to MongoDB and can create bugs)"
+          }
+        },
+        {
+          "name": "Get Chat History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/chat/history?session_id={{session_id}}&limit=50",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["chat", "history"],
+              "query": [
+                {
+                  "key": "session_id",
+                  "value": "{{session_id}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            },
+            "description": "Get chat history for a session from MongoDB"
+          }
+        },
+        {
+          "name": "Legacy Query (No Auth)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"Show me all issues\",\n  \"github_repo\": \"octocat/Hello-World\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/query",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["query"]
+            },
+            "description": "Legacy endpoint for backward compatibility (no authentication required)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bug Tracking",
+      "item": [
+        {
+          "name": "Get User Bugs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/bugs/user?session_id={{session_id}}&limit=50",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["bugs", "user"],
+              "query": [
+                {
+                  "key": "session_id",
+                  "value": "{{session_id}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            },
+            "description": "Get all bugs created by the current user with detailed information"
+          }
+        },
+        {
+          "name": "Get Session Bugs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/bugs/session/{{session_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["bugs", "session", "{{session_id}}"]
+            },
+            "description": "Get all bugs created during a specific chat session"
+          }
+        },
+        {
+          "name": "Get Repository Bugs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/bugs/repository/octocat/Hello-World",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["bugs", "repository", "octocat", "Hello-World"]
+            },
+            "description": "Get all bugs for a specific GitHub repository"
+          }
+        },
+        {
+          "name": "Get Bug Statistics (User)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/bugs/statistics?session_id={{session_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["bugs", "statistics"],
+              "query": [
+                {
+                  "key": "session_id",
+                  "value": "{{session_id}}"
+                }
+              ]
+            },
+            "description": "Get bug statistics for the current user (types, priorities, status distribution)"
+          }
+        },
+        {
+          "name": "Get Bug Statistics (System)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/bugs/statistics",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["bugs", "statistics"]
+            },
+            "description": "Get system-wide bug statistics (no authentication required)"
+          }
+        },
+        {
+          "name": "Update Bug Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"resolved\",\n  \"notes\": \"Fixed the login issue by updating authentication logic\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/bugs/{{bug_id}}/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["bugs", "{{bug_id}}", "status"]
+            },
+            "description": "Update bug status (open, in_progress, resolved, closed, wont_fix)"
+          }
+        },
+        {
+          "name": "Get Bug Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/bugs/{{bug_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["bugs", "{{bug_id}}"]
+            },
+            "description": "Get detailed information about a specific bug"
+          }
+        },
+        {
+          "name": "Get Bug Types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/bugs/types",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["bugs", "types"]
+            },
+            "description": "Get available bug types and their descriptions"
+          }
+        },
+        {
+          "name": "Get Bug Priorities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/bugs/priorities",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["bugs", "priorities"]
+            },
+            "description": "Get bug priority levels and their descriptions"
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/user/profile?session_id={{session_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["user", "profile"],
+              "query": [
+                {
+                  "key": "session_id",
+                  "value": "{{session_id}}"
+                }
+              ]
+            },
+            "description": "Get user profile information from MongoDB"
+          }
+        },
+        {
+          "name": "Get User Activity",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/user/activity?session_id={{session_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["user", "activity"],
+              "query": [
+                {
+                  "key": "session_id",
+                  "value": "{{session_id}}"
+                }
+              ]
+            },
+            "description": "Get comprehensive user activity summary including bug statistics"
+          }
+        },
+        {
+          "name": "Update GitHub Repository",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"session_id\": \"{{session_id}}\",\n  \"github_url\": \"https://github.com/username/new-repo\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/update-github-repo",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["update-github-repo"]
+            },
+            "description": "Update user's GitHub repository configuration"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Session Management",
+      "item": [
+        {
+          "name": "Delete Session",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/session/{{session_id}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["session", "{{session_id}}"]
+            },
+            "description": "Delete a specific session and deactivate it"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin & Analytics",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/admin/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["admin", "users"]
+            },
+            "description": "Get all registered users (admin only)"
+          }
+        },
+        {
+          "name": "Get System Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/admin/analytics",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["admin", "analytics"]
+            },
+            "description": "Get comprehensive system analytics including bug statistics"
+          }
+        },
+        {
+          "name": "Get Database Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/admin/db/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["admin", "db", "health"]
+            },
+            "description": "Get detailed database health status and statistics"
+          }
+        }
+      ]
+    },
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["health"]
+            },
+            "description": "Basic health check endpoint"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "session_id",
+      "value": "your-session-id-here",
+      "description": "Session ID obtained after login"
+    },
+    {
+      "key": "bug_id",
+      "value": "your-bug-id-here",
+      "description": "Bug ID from bug tracking endpoints"
+    }
+  ]
+} 

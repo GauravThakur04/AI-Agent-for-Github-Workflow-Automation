@@ -1,0 +1,421 @@
+{
+	"info": {
+		"_postman_id": "12345678-1234-1234-1234-123456789012",
+		"name": "GitHub AI Agent API For Bug Analytics",
+		"description": "API collection for GitHub AI Agent with bug tracking and analytics",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"github_url\": \"https://github.com/owner/repo\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"password123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update GitHub Repo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"github_url\": \"https://github.com/newowner/newrepo\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/update-github-repo?session_id={{session_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"update-github-repo"
+					],
+					"query": [
+						{
+							"key": "session_id",
+							"value": "{{session_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/user/profile?session_id={{session_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						"profile"
+					],
+					"query": [
+						{
+							"key": "session_id",
+							"value": "{{session_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/logout?session_id={{session_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"logout"
+					],
+					"query": [
+						{
+							"key": "session_id",
+							"value": "{{session_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Chat with AI Agent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"message\": \"How many bugs are open in the last week?\",\n  \"session_id\": \"{{session_id}}\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/chat",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"chat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query AI Agent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"Show me the assignment details of bugs\",\n  \"github_token\": \"{{github_token}}\",\n  \"openai_key\": \"{{openai_key}}\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/query",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Admin Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/admin/users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Bug",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Login button not working\",\n  \"description\": \"Users cannot click the login button on mobile devices\",\n  \"bug_type\": \"ui_ux\",\n  \"priority\": 2,\n  \"assignees\": [\"frontend-dev\", \"mobile-dev\"]\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/bugs/create?session_id={{session_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"bugs",
+						"create"
+					],
+					"query": [
+						{
+							"key": "session_id",
+							"value": "{{session_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Bug Types",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/bugs/types",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"bugs",
+						"types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Bug Analytics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/bugs/analytics?session_id={{session_id}}&time_period=last_week&analysis_type=open_bugs",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"bugs",
+						"analytics"
+					],
+					"query": [
+						{
+							"key": "session_id",
+							"value": "{{session_id}}"
+						},
+						{
+							"key": "time_period",
+							"value": "last_week",
+							"description": "Options: last_week, last_2_weeks, last_month, last_3_months, last_year, all_time"
+						},
+						{
+							"key": "analysis_type",
+							"value": "open_bugs",
+							"description": "Options: open_bugs, closed_bugs, trends, assignments, priority_distribution"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Assignment Analytics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/bugs/assignment-analytics?session_id={{session_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"bugs",
+						"assignment-analytics"
+					],
+					"query": [
+						{
+							"key": "session_id",
+							"value": "{{session_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Bugs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/bugs/list?session_id={{session_id}}&status=open",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"bugs",
+						"list"
+					],
+					"query": [
+						{
+							"key": "session_id",
+							"value": "{{session_id}}"
+						},
+						{
+							"key": "status",
+							"value": "open",
+							"description": "Optional: open, closed, resolved"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Bug",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"status\": \"closed\",\n  \"priority\": 2,\n  \"assignees\": [\"developer1\", \"developer2\"]\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/bugs/{{bug_id}}?session_id={{session_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"bugs",
+						"{{bug_id}}"
+					],
+					"query": [
+						{
+							"key": "session_id",
+							"value": "{{session_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "session_id",
+			"value": "your-session-id-here"
+		},
+		{
+			"key": "github_token",
+			"value": "your-github-token-here"
+		},
+		{
+			"key": "openai_key",
+			"value": "your-openai-key-here"
+		},
+		{
+			"key": "bug_id",
+			"value": "your-bug-id-here"
+		}
+	]
+}

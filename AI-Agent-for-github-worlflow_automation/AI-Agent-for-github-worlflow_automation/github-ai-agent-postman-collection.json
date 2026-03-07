@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "github-ai-agent-collection",
+		"name": "GitHub AI Agent API",
+		"description": "Complete Postman collection for testing the GitHub AI Agent API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": ["{{base_url}}"],
+					"path": ["health"]
+				},
+				"description": "Check if the API server is running and healthy"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Natural Language Processing",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"message\": \"Show me all issues in the repository\",\n  \"session_id\": \"test-session-123\",\n  \"github_repo\": \"octocat/Hello-World\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/chat",
+					"host": ["{{base_url}}"],
+					"path": ["chat"]
+				},
+				"description": "Main chat endpoint that understands natural language and performs GitHub actions"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Create Issue",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"message\": \"Create a new issue about the login bug in the authentication system\",\n  \"session_id\": \"test-session-456\",\n  \"github_repo\": \"octocat/Hello-World\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/chat",
+					"host": ["{{base_url}}"],
+					"path": ["chat"]
+				},
+				"description": "Test creating an issue using natural language"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Show Pull Requests",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"message\": \"What pull requests are pending?\",\n  \"session_id\": \"test-session-789\",\n  \"github_repo\": \"octocat/Hello-World\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/chat",
+					"host": ["{{base_url}}"],
+					"path": ["chat"]
+				},
+				"description": "Test fetching pull requests using natural language"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Add Comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"message\": \"Add a comment to issue #5 saying this is being investigated\",\n  \"session_id\": \"test-session-101\",\n  \"github_repo\": \"octocat/Hello-World\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/chat",
+					"host": ["{{base_url}}"],
+					"path": ["chat"]
+				},
+				"description": "Test adding a comment to an issue using natural language"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Assign User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"message\": \"Assign issue #3 to johnsmith\",\n  \"session_id\": \"test-session-202\",\n  \"github_repo\": \"octocat/Hello-World\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/chat",
+					"host": ["{{base_url}}"],
+					"path": ["chat"]
+				},
+				"description": "Test assigning a user to an issue using natural language"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat - Help Request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"message\": \"What can you help me with?\",\n  \"session_id\": \"test-session-303\",\n  \"github_repo\": \"octocat/Hello-World\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/chat",
+					"host": ["{{base_url}}"],
+					"path": ["chat"]
+				},
+				"description": "Test help functionality"
+			},
+			"response": []
+		},
+		{
+			"name": "Legacy Query Endpoint",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"Show me all issues\",\n  \"github_repo\": \"octocat/Hello-World\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/query",
+					"host": ["{{base_url}}"],
+					"path": ["query"]
+				},
+				"description": "Legacy endpoint for backward compatibility"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Session",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/session/test-session-123",
+					"host": ["{{base_url}}"],
+					"path": ["session", "test-session-123"]
+				},
+				"description": "Delete a specific chat session"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+} 

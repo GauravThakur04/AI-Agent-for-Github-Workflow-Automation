@@ -1,0 +1,211 @@
+{
+    "info": {
+      "name": "GitHub AI Agent - User Management",
+      "description": "Collection for testing user registration, login, and session management endpoints",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "User Registration",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"github_url\": \"https://github.com/octocat/Hello-World\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:8000/register",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["register"]
+          },
+          "description": "Register a new user account with GitHub repository configuration"
+        }
+      },
+      {
+        "name": "User Login",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"password123\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:8000/login",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["login"]
+          },
+          "description": "Authenticate user and get session ID"
+        }
+      },
+      {
+        "name": "Chat with Session",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"message\": \"Show me all issues\",\n  \"session_id\": \"{{session_id}}\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:8000/chat",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["chat"]
+          },
+          "description": "Send a message using authenticated session"
+        }
+      },
+      {
+        "name": "Update GitHub Repository",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"session_id\": \"{{session_id}}\",\n  \"github_url\": \"https://github.com/username/new-repository\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:8000/update-github-repo",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["update-github-repo"]
+          },
+          "description": "Update user's GitHub repository"
+        }
+      },
+      {
+        "name": "Get User Profile",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:8000/user/profile?session_id={{session_id}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["user", "profile"],
+            "query": [
+              {
+                "key": "session_id",
+                "value": "{{session_id}}"
+              }
+            ]
+          },
+          "description": "Get user profile information"
+        }
+      },
+      {
+        "name": "Logout",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"session_id\": \"{{session_id}}\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:8000/logout",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["logout"]
+          },
+          "description": "Logout user and clear session"
+        }
+      },
+      {
+        "name": "Legacy Query (No Auth)",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"query\": \"Show me all issues\",\n  \"github_repo\": \"octocat/Hello-World\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:8000/query",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["query"]
+          },
+          "description": "Legacy endpoint for backward compatibility (no authentication required)"
+        }
+      },
+      {
+        "name": "Health Check",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:8000/health",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["health"]
+          },
+          "description": "Health check endpoint"
+        }
+      },
+      {
+        "name": "Get All Users (Admin)",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:8000/admin/users",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["admin", "users"]
+          },
+          "description": "Get all users (admin endpoint for development/testing)"
+        }
+      }
+    ],
+    "variable": [
+      {
+        "key": "session_id",
+        "value": "",
+        "type": "string"
+      }
+    ]
+  }

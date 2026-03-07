@@ -1,0 +1,15 @@
+{
+  "example-user-id": {
+    "user_id": "example-user-id",
+    "username": "example_user",
+    "email": "user@example.com",
+    "password": "example_password",
+    "github_url": "https://github.com/username/repository",
+    "github_username": "username",
+    "github_repo": "username/repository",
+    "created_at": "2025-01-01T00:00:00.000000",
+    "last_login": null,
+    "is_active": true
+  }
+}
+
