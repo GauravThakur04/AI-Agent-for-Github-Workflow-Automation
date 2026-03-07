@@ -6,5 +6,8 @@ __pycache__/
 *.log
 project_dataset/
 *.safetensors
-*.bin
-*.pt
+*.b
+.env
+venv/
+node_modules/
+__pycache__/
