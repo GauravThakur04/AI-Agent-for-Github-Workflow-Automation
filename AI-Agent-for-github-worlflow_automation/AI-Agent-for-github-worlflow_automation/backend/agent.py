@@ -88,7 +88,7 @@ class GitHubAIAgent:
         text = f"{title} {description}"
         components = []
         
-        # Common component patterns
+        # Common component regex patterns
         component_patterns = [
             r"in (\w+\.py|\w+\.js|\w+\.ts|\w+\.jsx|\w+\.tsx)",
             r"file (\w+\.\w+)",
