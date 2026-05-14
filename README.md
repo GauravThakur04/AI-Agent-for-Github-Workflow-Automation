@@ -15,14 +15,14 @@ An intelligent conversational AI agent that enables natural language interaction
 - **Multi-Repository Support**: Work with different GitHub repositories seamlessly
 
 ### GitHub Operations Supported
-- ✅ **Fetch Issues**: Get all issues from repository with filtering
-- ✅ **Create Issues**: Create new issues with automatic bug classification
-- ✅ **Update Issues**: Modify existing issues
-- ✅ **Fetch Pull Requests**: Get all pull requests
-- ✅ **Add Comments**: Add comments to existing issues
-- ✅ **Assign Users**: Assign users to issues
-- ✅ **Bug Classification**: Automatic categorization by type (syntax, runtime, logic, performance, security, UI/UX, integration)
-- ✅ **Priority Assignment**: Intelligent priority level assignment (1-4 scale)
+- **Fetch Issues**: Get all issues from repository with filtering
+- **Create Issues**: Create new issues with automatic bug classification
+- **Update Issues**: Modify existing issues
+- **Fetch Pull Requests**: Get all pull requests
+- **Add Comments**: Add comments to existing issues
+- **Assign Users**: Assign users to issues
+- **Bug Classification**: Automatic categorization by type (syntax, runtime, logic, performance, security, UI/UX, integration)
+- **Priority Assignment**: Intelligent priority level assignment (1-4 scale)
 
 ## Architecture
 
