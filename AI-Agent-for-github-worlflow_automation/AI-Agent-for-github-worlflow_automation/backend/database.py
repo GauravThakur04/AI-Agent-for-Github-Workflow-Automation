@@ -9,7 +9,7 @@ import json
 
 class MongoDBService:
     def __init__(self):
-        # Get MongoDB connection string from environment or use default
+        # Get MongoDB connection string from environment or use default configs
         mongo_uri = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
         self.client = MongoClient(mongo_uri)
         self.db: Database = self.client.github_ai_agent
