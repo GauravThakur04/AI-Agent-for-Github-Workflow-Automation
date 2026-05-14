@@ -10,7 +10,7 @@ class UserManager:
     
     def _validate_github_url(self, github_url: str) -> tuple[bool, str, str]:
         """Validate GitHub URL and extract username/repo"""
-        # Patterns for GitHub URLs
+        # Regex Patterns for GitHub URLs
         patterns = [
             r'https?://github\.com/([^/]+)/([^/]+)',
             r'https?://www\.github\.com/([^/]+)/([^/]+)',
