@@ -82,7 +82,7 @@ class GitHubAPI:
         resp.raise_for_status()
         return resp.json()
 
-# Legacy functions for backward compatibility
+# Legacy function for backward compatibility
 REPO = os.getenv('GITHUB_REPO', 'octocat/Hello-World')
 
 def fetch_issues(token):
