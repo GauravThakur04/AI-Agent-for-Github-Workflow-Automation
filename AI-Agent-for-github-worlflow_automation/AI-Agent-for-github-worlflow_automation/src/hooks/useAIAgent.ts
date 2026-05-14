@@ -49,7 +49,7 @@ export const useAIAgent = () => {
       
       const data = await response.json();
       
-      // Remove loading message and add response
+      // Remove loading messages and add response
       setMessages(prev => {
         const withoutLoading = prev.filter(msg => !msg.loading);
         return [
