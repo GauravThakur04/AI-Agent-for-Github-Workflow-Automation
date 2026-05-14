@@ -47,7 +47,7 @@
   }
 }
 
-/* Animation classes */
+/* Custom Animation classes */
 .animate-blob {
   animation: blob 7s infinite;
 }
