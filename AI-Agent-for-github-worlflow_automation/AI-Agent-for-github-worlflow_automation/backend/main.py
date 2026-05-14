@@ -63,7 +63,7 @@ def summarize(text: str):
 
     return {"summary": summary}
     
-    # Validate required fields
+    # Validate the required fields
     if not all([username, email, password, github_url]):
         raise HTTPException(status_code=400, detail="All fields are required")
     
