@@ -25,7 +25,7 @@ GITHUB_TOKEN=ghp-your-github-personal-access-token-here
 GITHUB_REPO=your-username/your-repository-name
 ```
 
-### 2. Install Dependencies
+### 2. Install the Dependencies
 
 ```bash
 cd backend
